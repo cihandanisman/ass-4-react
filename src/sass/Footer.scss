@@ -1,0 +1,30 @@
+.footer-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+  width: 60%;
+  margin: auto;
+
+  tr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    align-items: center;
+    padding: 1rem;
+    th {
+      background-color: #ffc861;
+      width: 24%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      color: #9a4e8d;
+    }
+    // div {
+    //   width: 15%;
+      
+    // }
+  }
+}
