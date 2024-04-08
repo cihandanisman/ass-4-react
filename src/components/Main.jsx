@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 
 const Main = () => {
   const [user, setUser] = useState([]);
+  const [allUser, setAllUser] = useState([]);
   const [addNewUser, setAddNewUser] = useState(true);
   const [info, setInfo] = useState();
   const url = "https://randomuser.me/api/";
@@ -20,36 +21,33 @@ const Main = () => {
       const response = await axios(url);
       console.log(response.data.results);
       setUser(response.data.results);
+      setInfo(
+        <div style={{ textAlign: "center" }}>
+          My name is: <br />
+          {response.data.results[0].name.first}{" "}
+          {response.data.results[0].name.last}
+        </div>
+      );
     } catch (error) {
       console.log(error);
     }
   };
   console.log(user);
   // setAddNewUser(false)
-  const addUser = async () => {
-    try {
-      const response = await axios(url);
-      const yeniKullanici = response.data.results[0];
-      setUser([yeniKullanici]); // Yeni kullanıcıyı mevcut kullanıcı listesine ekleyin
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
-    
-
+  const addUser = () => {
+    setAllUser([...user, ...allUser]);
   };
-  
+  console.log(allUser);
 
   useEffect(() => {
     getUser();
-    personName("dsds");
   }, []);
 
-  const personName = (e) => {
+  const personName = (fullName) => {
     setInfo(
       <div style={{ textAlign: "center" }}>
         My name is: <br />
-        {e}
+        {fullName}
       </div>
     );
   };
@@ -94,6 +92,8 @@ const Main = () => {
     );
   };
   // getUser();
+  const isDisabled = allUser.some((item) => item.email === user[0].email);
+  // console.log(isDisabled);
   return (
     <div>
       {user.map((person) => (
@@ -112,7 +112,9 @@ const Main = () => {
           <div className="main-logos">
             <img
               width={"30px"}
-              onMouseOver={() => personName(person.name.first)}
+              onMouseOver={() =>
+                personName(`${person.name.first} ${person.name.last}`)
+              }
               src={logo1}
               alt=""
             />
@@ -149,11 +151,13 @@ const Main = () => {
           </div>
           <div className="main-buttons">
             <button onClick={getUser}>NEW USER</button>
-            <button onClick={addUser}>ADD USER</button>
+            <button onClick={addUser} disabled={isDisabled}>
+              ADD USER
+            </button>
           </div>
         </div>
       ))}
-      <Footer user={user} addNewUser={addNewUser} />
+      <Footer user={allUser} addNewUser={addNewUser} />
     </div>
   );
 };
