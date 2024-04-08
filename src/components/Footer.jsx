@@ -1,6 +1,6 @@
 import React from "react";
 import "../sass/Footer.scss";
-const Footer = ({ user, addNewUser }) => {
+const Footer = ({ user}) => {
   return (
     <div className="footer-table">
       <tr>
@@ -9,7 +9,7 @@ const Footer = ({ user, addNewUser }) => {
         <th>Phone</th>
         <th>Age</th>
       </tr>
-      {addNewUser &&
+      {
         user.map((person, id) => (
           <tr key={id}>
             <div>{person.name.first}</div>

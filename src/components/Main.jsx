@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 const Main = () => {
   const [user, setUser] = useState([]);
   const [allUser, setAllUser] = useState([]);
-  const [addNewUser, setAddNewUser] = useState(true);
+  
   const [info, setInfo] = useState();
   const url = "https://randomuser.me/api/";
 
@@ -157,7 +157,7 @@ const Main = () => {
           </div>
         </div>
       ))}
-      <Footer user={allUser} addNewUser={addNewUser} />
+      <Footer user={allUser} />
     </div>
   );
 };
